@@ -1,0 +1,10 @@
+.pager li:not(:first-child) {
+    margin-left: 5px;
+}
+
+
+.pager li .active_link {
+    background: #000000 !important;
+    color: white;
+    font-weight: 700;
+}
