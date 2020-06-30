@@ -30,34 +30,25 @@ if(isset($_GET['edit_user'])) {
         $user_lastname = $_POST['user_lastname'];
         $user_role = $_POST['user_role'];
         
-        
-        // Wich file to upload
-        //$post_image = $_FILES['image']['name'];
-        
-        // Temporery saved file 
-        //$post_image_temp = $_FILES['image']['tmp_name'];
     
     
         $username = $_POST['username'];
         $user_email = $_POST['user_email'];
         $user_password = $_POST['user_password'];
         
-        //$post_date = date('d-m-y');
-        // $post_comment_count = 4;
-        
-        // Moving the uploaded file to the folder 
-        //move_uploaded_file($post_image_temp, "../images/$post_image");
+     
         
             $select_randsalt_query = $pdo->prepare("SELECT randSalt FROM users");
             $select_randsalt_query->execute();
 
+
             if (!$select_randsalt_query) {
 
-                die("Query failed". mysqli_error($connection));
+                die("Query failed". mysqli_error($pdo));
             
             }
 
-            $row = mysqli_fetch_array($select_randsalt_query);
+            $row = $select_randsalt_query->fetch();
             $salt = $row['randSalt'];
 
             $hashed_password = crypt($user_password, $salt);
@@ -65,14 +56,15 @@ if(isset($_GET['edit_user'])) {
         
         $edit_user_query = $pdo->prepare("UPDATE users SET user_firstname  = ? , user_lastname = ? , user_role   =  ? , username = ? , user_email = ? , user_password   = ? WHERE user_id = ? ");
         
-        $edit_user_query->execute([$user_firstname, $user_lastname, $user_role, $user_name, $user_email, $hashed_password , $the_user_id]);
+        $edit_user_query->execute([$user_firstname, $user_lastname, $user_role, $username, $user_email, $hashed_password , $the_user_id]);
         
         confirmQuery($edit_user_query);
     }
 
 
 ?>
-  
+<div class='container'>
+  <div class='row'>
 <form action="" method="post" enctype="multipart/form-data">        
     
     <div class="form-group">
@@ -101,29 +93,7 @@ if(isset($_GET['edit_user'])) {
          
       </select>
     </div>
-    
-  <!--  <div class="form-group">
-     
-      <select name="post_category" id="post_category">
-          <?php
-          // Quering the data
-            $select_categories = $pdo->prepare("SELECT * FROM categories");
-            $select_categories->execute();
-
-            confirmQuery($select_categories);
-          
-         // Showing it in a Dropdown list/option 
-            while($row =$select_categories->fetch()) {
-
-                $cat_id = $row['cat_id'];
-                $cat_title = $row['cat_title'];
-                echo "<option value='{$cat_id}'>{$cat_title}</option>";
-
-            } 
-          ?>
-      </select>
-      
-    </div>  -->
+ 
     
     <div class="form-group">
        <label for="username">Username</label>
@@ -148,4 +118,5 @@ if(isset($_GET['edit_user'])) {
     </div>
 </form>
   
-  
+  </div>
+</div>

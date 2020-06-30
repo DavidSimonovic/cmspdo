@@ -5,7 +5,9 @@
         <label for="cat_title">Edit Category</label>
 
             <?php
+            
                 if(isset($_GET['edit'])){
+
                     $cat_id = $_GET['edit'];
 
                     $select_categories_id = $pdo->prepere("SELECT * FROM categories WHERE cat_id = ? ");
@@ -28,6 +30,7 @@
                      <?php
 
                         if(isset($_POST['update_category'])) {
+
                             $the_cat_title = $_POST['cat_title'];
 
                             $update_query = $pdo->prepere("UPDATE categories SET cat_title = ? WHERE  cat_id = ? ");

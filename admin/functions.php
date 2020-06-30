@@ -1,5 +1,8 @@
 <?php 
 
+
+// Tests if the query was sucessfull
+
 function confirmQuery($result) {
     global $pdo;
 
@@ -7,7 +10,9 @@ function confirmQuery($result) {
             die("QUERY FAILS " . mysqli_error($pdo));
         }
 }
+
 // Adding categories
+
 function insert_categories() {
     
     global $pdo;
@@ -16,23 +21,27 @@ function insert_categories() {
         $cat_title = $_POST["cat_title"];
 
         if($cat_title == "" || empty($cat_title)) {
-            echo "This fild should not be empty";
+            echo "This field should not be empty";
         } else {
             $create_category_query = $pdo->prepare("INSERT INTO categories(cat_title) VALUES = ? ");
             $create_category_query->execute([$cat_title]);
 
 
             if(!$create_category_query) {
-                die('Konekcija je propala' . mysqli_error($pdo));
+                die('Connection failed' . mysqli_error($pdo));
             }
         }
     }   
 }
+
 // Searching and Showing categories
+
 function findAllCategories() {
     
     global $pdo;
-// Showing in table form DB with while loop
+
+    // All categories
+
     $select_categories = $pdo->prepare("SELECT * FROM categories");
     $select_categories->execute();
 
@@ -48,9 +57,13 @@ function findAllCategories() {
         echo "</tr>";
     }
 }
+
 // Deleting categories 
+
 function deletCategory(){
+
     global $pdo;
+    
     if(isset($_GET['delete'])) {
 
         $the_cat_id = $_GET['delete'];
@@ -61,6 +74,7 @@ function deletCategory(){
 
         header("Location: categories.php");
         
+
         if(!$delete_category){
 
             die("Not Deleted" . mysqli_error($pdo));
@@ -70,4 +84,7 @@ function deletCategory(){
 
     
 }
+
+
+
 ?>

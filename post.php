@@ -107,9 +107,9 @@
                                 // new Pdo 
 
 
-                                $create_comment_query = $pdo->prepare("INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) VALUES ?,?,?,?, 'unapproved', now()");
+                                $create_comment_query = $pdo->prepare("INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) VALUES (?,?,?,?, ?, now())");
                 
-                                $create_comment_query->execute([$the_post_id, $comment_author, $comment_email,$comment_content]);
+                                $create_comment_query->execute([$the_post_id, $comment_author, $comment_email, $comment_content, 'unapproved' ]);
 
 
                             

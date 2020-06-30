@@ -204,6 +204,7 @@
                       google.charts.setOnLoadCallback(drawChart);
 
                       function drawChart() {
+
                         var data = google.visualization.arrayToDataTable([
                           ['Data', 'Count'],
                             
@@ -212,6 +213,7 @@
                             <?php
                                 
                                 $element_text = ['All posts', 'Active Posts', 'Draft Posts', 'Comments', 'Panding comments', 'Users', 'Subscribers', 'Categories'];
+                                
                                 $element_count = [$post_count, $post_published_count, $post_draft_count, $comment_count, $unapproved_comment_count, $user_count, $subscriber_count, $category_count];
                                 
                                 for($i = 0; $i < 8; $i++) {
@@ -236,6 +238,7 @@
                         var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
                         chart.draw(data, google.charts.Bar.convertOptions(options));
+
                       }
                     </script>
                     

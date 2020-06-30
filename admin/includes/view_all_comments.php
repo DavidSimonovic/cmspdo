@@ -17,6 +17,8 @@
      
       <?php 
 
+        // All comments
+        
         $select_comments = $pdo->prepare("SELECT * FROM comments");
         $select_comments->execute();
 

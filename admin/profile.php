@@ -34,14 +34,13 @@
         
         
  
-    
         $username = $_POST['username'];
         $user_email = $_POST['user_email'];
         $user_password = $_POST['user_password'];
      
         
          
-        $edit_user_query = $pdo->prepare( "UPDATE users SET user_firstname  = ?,user_lastname = ?, user_role   = ? , username = ?, user_email = ?, user_password   = ? WHERE username = $username ");
+        $edit_user_query = $pdo->prepare( "UPDATE users SET user_firstname  = ?,user_lastname = ?, user_role   = ? , username = ?, user_email = ?, user_password   = ? WHERE username = ? ");
         
         $edit_user_query->execute([$user_firstname, $user_lastname,$user_role, $username, $user_email, $user_password , $username]);
     
@@ -56,6 +55,7 @@
     <!-- Navigation -->
 
         <?php include "includes/admin_navigation.php"; ?>
+        
         <div id="page-wrapper">
             <div class="container-fluid">
                 <!-- Page Heading -->

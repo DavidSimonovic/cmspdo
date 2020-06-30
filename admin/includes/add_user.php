@@ -10,10 +10,26 @@
         $username = $_POST['username'];
         $user_email = $_POST['user_email'];
         $user_password = $_POST['user_password'];
+
+
+        $select_randsalt_query = $pdo->prepare("SELECT randSalt FROM users");
+        $select_randsalt_query->execute();
+
+        if (!$select_randsalt_query) {
+
+            die("Query failed". mysqli_error($pdo));
+        
+        }
+
+        $row = $select_randsalt_query->fetch();
+
+        $salt = $row['randSalt'];
+
+        $hashed_password = crypt($user_password, $salt);
   
-        // Making a query with the given info to inser in to the database
-        $create_user_query = $pdo->prepare("INSERT INTO users(user_firstname, user_lastname, user_role,username,user_email,user_password) VALUES( ? , ? , ? , ? , ? , ? )");
-        $create_user_query->execute([$user_firstname , $user_lastname, $user_role, $username, $user_email, $user_password ]); 
+        // Making a query with the given info to insert in to the database
+        $create_user_query = $pdo->prepare("INSERT INTO users (user_firstname, user_lastname, user_image, user_role,username,user_email,user_password) VALUES ( ? , ? , 'img', ? , ? , ? ,?)");
+        $create_user_query->execute([$user_firstname , $user_lastname, $user_role, $username, $user_email, $hashed_password ]); 
         
         // Function we made to check if connection is working
         confirmQuery($create_user_query);
@@ -45,31 +61,8 @@
          
       </select>
     </div>
-    
-  <!--  <div class="form-group">
-     
-      <select name="post_category" id="post_category">
-          <?php
 
-          // Quering the data
-
-            $select_categories = $pdo->prepare("SELECT * FROM categories");
-            $select_categories->execute();
-
-            confirmQuery($select_categories);
-          
-         // Showing it in a Dropdown list/option 
-
-             while ($row = $select_categories->fetch()){
-                $cat_id = $row['cat_id'];
-                $cat_title = $row['cat_title'];
-                echo "<option value='{$cat_id}'>{$cat_title}</option>";
-            } 
-          ?>
-      </select>
-      
-    </div>  -->
-    
+   
     <div class="form-group">
        <label for="username">Username</label>
        <input type="text" class="form-control" name="username">

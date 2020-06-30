@@ -50,6 +50,7 @@
 
 <?php
     if(isset($_GET['change_to_admin'])) {
+        
         $the_user_id = $_GET['change_to_admin'];
        
         $change_to_admin_query = $pdo->prepare("UPDATE users SET user_role = 'admin' WHERE user_id =  ? ");
@@ -62,6 +63,7 @@
     }
 
     if(isset($_GET['change_to_sub'])) {
+
         $the_user_id = $_GET['change_to_sub'];
        
         $change_to_sub_query = $pdo->prepare("UPDATE users SET user_role = 'subscriber' WHERE user_id = ? ");
@@ -74,6 +76,7 @@
     }
 
     if(isset($_GET['delete'])) {
+
         $the_user_id = $_GET['delete'];
        
         $delete_user_query = $pdo->prepare("DELETE FROM users WHERE user_id = ? ");

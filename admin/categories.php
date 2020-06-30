@@ -11,15 +11,26 @@
 
                 <!-- Page Heading -->
                 <div class="row">
+                   
                     <div class="col-lg-12">
+                        
                         <h1 class="page-header">
-                            Welcome to admin
+                        
+                            Wlecome 
                             <small><?php echo $_SESSION['username']; ?></small>
                         </h1>
                         
                         <div class="col-xs-6">
+
+                            
                            
-                           <?php insert_categories(); ?>
+                           <?php 
+
+                            // this function is in the functions.php file
+
+                           insert_categories(); 
+                           
+                           ?>
                             
                             <form action="" method="post">
                                 
@@ -40,6 +51,7 @@
                             <?php
                             
                               if(isset($_GET['edit'])) {
+                                
                                 $cat_id = $_GET['edit'];
                                   
                                 include "includes/update_categories.php";
@@ -52,41 +64,46 @@
                         <div class="col-xs-6">
             
                            <table class="table table-bordered table-hover">
-                               <thead>
+                              
+                                <thead>
+
                                    <tr>
-                                       <th>Id</th>
+                                        <th>Id</th>
+
                                         <th>Category Title</th>
+
                                    </tr>
-                               </thead>
-                               <tbody>
+                                
+                                </thead>
+                               
+                                <tbody>
                                  
-                                      <?php  // FIND ALL CATEGORIES
+                                      <?php  
+                                        
+                                            // this function is in the functions.php file 
+
                                             findAllCategories();
+
                                         ?>
                                         
                                         
-                                        <?php // DELETE SPECIFIC CATEGORY
+                                        <?php 
                                             
-                                         deletCategory();
+                                            // this function is in the functions.php file
+                                            
+                                            deletCategory();
                                    
                                    
                                         ?>
                                       
-                                      
-                                  
-                               </tbody>
-                           </table>
+                              </tbody>
                            
-                     
+                            </table>
+
                         </div>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+          
                     </div>
+                    
                 </div>
                 <!-- /.row -->
 
