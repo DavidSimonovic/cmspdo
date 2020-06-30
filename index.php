@@ -78,10 +78,14 @@
                         <!-- Authore name -->
                             by <a href="author_posts.php?author=<?php echo $post_author; ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author; ?></a>
                         </p>
+
                         <p>
                         
                         <!-- Date -->
-                        <span class="glyphicon glyphicon-time"></span><?php echo ' '.$post_date; ?></p>
+                        <span class="glyphicon glyphicon-time"></span><?php echo ' '.$post_date; ?>
+                    
+                        </p>
+                        
                         <hr>
                         
                         <!-- Image -->

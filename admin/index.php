@@ -34,7 +34,7 @@
                                         <?php
 
                                             // all posts
-                                            $select_all_post = $pdo->prepare("SELECT * FROM posts");
+                                            $select_all_post = $pdo->prepare("SELECT count(*) FROM posts");
                                             
                                             $select_all_post->execute();
 
@@ -70,7 +70,7 @@
                                         <?php 
                                         
                                             // all comments
-                                            $select_all_comments = $pdo->prepare("SELECT * FROM comments");
+                                            $select_all_comments = $pdo->prepare("SELECT count(*) FROM comments");
                                             $select_all_comments->execute();
 
                                             $comment_count = $select_all_comments->fetchColumn();
@@ -103,7 +103,7 @@
                                       <?php 
 
                                             // all users
-                                            $select_all_users = $pdo->prepare("SELECT * FROM users");
+                                            $select_all_users = $pdo->prepare("SELECT count(*) FROM users");
                                             $select_all_users->execute();
 
                                             $user_count = $select_all_users->fetchColumn();
@@ -137,7 +137,7 @@
                                          <?php 
 
                                             // all categories
-                                            $select_all_categories = $pdo->prepare("SELECT * FROM categories");
+                                            $select_all_categories = $pdo->prepare("SELECT count(*) FROM categories");
 
                                             $select_all_categories->execute();
 
@@ -166,7 +166,7 @@
                 <?php 
 
                     // all published posts
-                    $select_all_published_posts = $pdo->prepare("SELECT * FROM posts WHERE post_status = ? ");
+                    $select_all_published_posts = $pdo->prepare("SELECT count(*) FROM posts WHERE post_status = ? ");
 
                     $select_all_published_posts->execute(['published']);
 
@@ -174,21 +174,21 @@
                 
 
                     // all drafts
-                    $select_all_draft_posts = $pdo->prepare("SELECT * FROM posts WHERE post_status = ? ");
+                    $select_all_draft_posts = $pdo->prepare("SELECT count(*) FROM posts WHERE post_status = ? ");
 
                     $select_all_draft_posts->execute(['draft']);
 
                     $post_draft_count = $select_all_draft_posts->fetchColumn();
                     
                     // all unapproved
-                    $unapproved_comment_query = $pdo->prepare("SELECT * FROM comments WHERE comment_status = ? ");
+                    $unapproved_comment_query = $pdo->prepare("SELECT count(*) FROM comments WHERE comment_status = ? ");
 
                     $unapproved_comment_query->execute(['unapproved']);
 
                     $unapproved_comment_count = $unapproved_comment_query->fetchColumn();
                 
                     // all subscribers
-                    $select_all_subscribers = $pdo->prepare("SELECT * FROM users WHERE user_role = ? ");
+                    $select_all_subscribers = $pdo->prepare("SELECT count(*) FROM users WHERE user_role = ? ");
                     
                     $select_all_subscribers->execute(['subscriber']);
 
@@ -213,7 +213,7 @@
                             <?php
                                 
                                 $element_text = ['All posts', 'Active Posts', 'Draft Posts', 'Comments', 'Panding comments', 'Users', 'Subscribers', 'Categories'];
-                                
+
                                 $element_count = [$post_count, $post_published_count, $post_draft_count, $comment_count, $unapproved_comment_count, $user_count, $subscriber_count, $category_count];
                                 
                                 for($i = 0; $i < 8; $i++) {
